@@ -1,0 +1,12 @@
+<div class="container mt-4">
+  <h2 class="mb-3 d-block">Welcome to the Gallery!</h2>
+  <div class="row">
+    <ng-container *ngFor="let photo of photosToShow">
+      <div class="col-2">
+        <img [src]="photo.thumbnailUrl" class="img-thumbnail">
+        <p>{{photo.title}}</p>
+        <a [routerLink]="['/gallery', photo.id]">View More</a>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container">
+  <div *ngIf="displayPhoto" class="card mt-3">
+    <div class="card-header">
+      {{displayPhoto.id}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <img [src]="displayPhoto.url">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" [(ngModel)]="newName">
+          <p>Photo ID: {{displayPhoto.id}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" (click)="onBack()">Back to Gallery</button>
+    </div>
+  </div>
+</div>
