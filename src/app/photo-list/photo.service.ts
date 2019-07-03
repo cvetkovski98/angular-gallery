@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { tap, catchError, map } from "rxjs/operators";
 import { IPhoto } from "./photo";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,8 @@ import { IPhoto } from "./photo";
 export class PhotoService {
   photoUrl = "https://jsonplaceholder.typicode.com/photos";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router: Router) {}
 
   getPhotos(): Observable<IPhoto[]> {
     return this.http.get<IPhoto[]>(this.photoUrl)
@@ -26,8 +28,36 @@ export class PhotoService {
 
   editPhoto(photo: IPhoto){
     var url = "http://jsonplaceholder.typicode.com/posts/" + photo.id;
-    this.http.put(url, JSON.stringify(photo));
+    this.http.put(url, JSON.stringify(photo)).subscribe(
+      (val) => {
+          console.log("PATCH call successful value returned in body",
+                      val);
+      },
+      response => {
+          console.log("PATCH call in error", response);
+      },
+      () => {
+          console.log("The PATCH observable is now completed.");
+      });;
     console.log("updated");
+  }
+
+  deletePhoto(photo: IPhoto){
+    var url = "http://jsonplaceholder.typicode.com/posts/" + photo.id;
+    this.http.delete(url).subscribe(
+      (val) => {
+          console.log("DELETE call successful value returned in body",
+                      val);
+                      this.router.navigate(['/gallery']);
+
+      },
+      response => {
+          console.log("DELETE call in error", response);
+      },
+      () => {
+          console.log("The DELETE observable is now completed.");
+      });;
+    console.log("deleted");
   }
 
   private handleError(err: HttpErrorResponse) {

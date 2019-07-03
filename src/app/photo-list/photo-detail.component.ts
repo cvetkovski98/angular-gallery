@@ -33,9 +33,17 @@ export class PhotoDetailComponent implements OnInit {
     // this.newName = this.displayPhoto.title;
   }
 
-  onBack() {
-    this.displayPhoto.title = this.newName;
+  savePhotoTitle(){
     this.photoService.editPhoto(this.displayPhoto);
+  }
+
+  onDelete(photoToDelete: IPhoto) {
+    if(confirm("Are you sure to delete " + photoToDelete.title)) {
+      this.photoService.deletePhoto(photoToDelete);
+    }
+  }
+
+  onBack() {
     return this.router.navigate(["/gallery"]);
   }
 }

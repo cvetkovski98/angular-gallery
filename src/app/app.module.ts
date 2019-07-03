@@ -9,7 +9,7 @@ import { PhotoDetailComponent } from './photo-list/photo-detail.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './photo-list/routes';
 import { FormsModule } from '@angular/forms';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

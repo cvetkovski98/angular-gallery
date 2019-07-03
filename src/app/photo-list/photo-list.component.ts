@@ -18,7 +18,7 @@ export class PhotoListComponent implements OnInit {
     console.log(this.counter);
     this.photoService.getPhotos().subscribe(photos => {
       this.photos = this.photos;
-      this.photosToShow = photos.slice(0, 10);
+      this.photosToShow = photos.slice(0, photos.length);
     });
   }
 }
